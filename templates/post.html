@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title">Create a New Post</h3>
+                    <form method="POST" action="{{ url_for('create_post') }}" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        
+                        
+                        <div class="form-group">
+                            {{ form.text.label(class="form-label") }}
+                            {{ form.text(class="form-control", rows="5", placeholder="Enter your post content") }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.file.label(class="form-label") }}
+                            {{ form.file(class="form-control-file") }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class = "container">
+    <h1>Create a new post</h1>
+    <form method="POST" enctype="multipart/form-data" >
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.text.label }}<br>
+            {{ form.text(size=130) }}<br>
+            {% for error in form.text.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.file.label }}<br>
+            {{ form.file }}<br>
+            {% for error in form.file.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+</div> -->

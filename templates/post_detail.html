@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+    .reply-box {
+        width: 200px; 
+        height: 30px; 
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                {% if post.file_path %}
+                <p><img src="{{ url_for('static', filename=post.file_path) }}" height="550px" width="855px" > </p>
+                {% endif %}
+                <div class="card-body">
+                    <p class="card-text">{{ post.text }}</p>
+                    <p class="card-text"><small class="text-muted">By 
+                        <a href="{{ url_for('profile', username=post.user.user_name) }}">{{ post.user.user_name }}</a> 
+                        on {{ post.created_at }}</small></p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <form method="POST" action="{{ url_for('upvote', post_id=post.id) }}">
+                            <button type="submit" class="btn btn-outline-success">Upvote ({{ post.upvote_count }})</button>
+                        </form>
+                        <form method="POST" action="{{ url_for('downvote', post_id=post.id) }}">
+                            <button type="submit" class="btn btn-outline-danger">Downvote ({{ post.downvote_count }})</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+ <div class="card mt-4">
+     <div class="card-body">
+      <h5 class="card-title">Comments</h5>
+            {% for comment in comments %}
+    <div>
+        <h4>{{ comment.text }}</h4>
+        <small>By {{ comment.user.user_name }} at {{ comment.created_at }}</small>
+
+        {% for reply in comment.replies %}
+            <div style="margin-left: 20px;">
+                <p>{{ reply.text }}</p>
+                <small>By {{ reply.user.user_name }} at {{ reply.created_at }}</small>
+            </div>
+        {% endfor %}
+        <form method="POST" action="{{ url_for('post_detail', post_id=post.id) }}">
+            {{ reply_form.hidden_tag() }}
+            <div class="reply-box-wrapper">
+                {{ reply_form.text.label }} {{ reply_form.text(class_='reply-box') }}
+            </div>
+            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+            <button type="submit" name="reply">Reply</button>
+        </form>
+    </div>
+{% endfor %}
+
+<h3>Add a Comment</h3>
+<form method="POST" action="{{ url_for('post_detail', post_id=post.id) }}">
+    {{ form.hidden_tag() }}
+    {{ form.text.label }} {{ form.text() }}
+    <button type="submit" name="comment">Comment</button>
+</form>
+<a href="{{ url_for('index') }}">Back to Posts</a>
+</div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

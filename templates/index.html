@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block content %}  
+
+
+    <div class="container">
+    <h1 >Ephemeral Connect</h1>
+
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="static/Screenshot 2024-06-10 163327.png" class="d-block w-100" alt="chess" height="400px" width="350px">
+        </div>
+        <div class="carousel-item">
+          <img src="static/Screenshot 2024-06-10 164107.png" class="d-block w-100" alt="wrd" height="400px">
+        </div>
+        <div class="carousel-item">
+          <img src="static/Screenshot 2024-06-10 170206.png" class="d-block w-100" alt="chesscom" height="400px">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+    </div>
+    
+               
+ 
+    <div class="container">
+      <div class="row row-cols-lg-3 row-cols-md-2 row-cols-s-1 mt-500">
+        {% for player in players: %}
+        {% set img = player["url"] %}
+          <div class="col" style="display: flex; justify-content: space-evenly;">
+              <div class="card" style="width: 18rem;">
+                  <img src= {{img}} class="card-img-top" alt="bLA" height="300px">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ player["name"] }}</h5>
+                    <h5 class="card-title">{{ player["id"] }}</h5>
+                    <p class="card-text">{{ player["info"] }}</p>
+                  </div>
+                </div>
+                
+          </div>
+
+        {% endfor %}
+          
+        </div>
+      </div>
+    
+
+  </div>
+
+  
+   
+  {% endblock %}
+
+  
