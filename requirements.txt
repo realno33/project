@@ -25,3 +25,4 @@ tzdata
 urllib3
 Werkzeug
 WTForms
+gunicorn
